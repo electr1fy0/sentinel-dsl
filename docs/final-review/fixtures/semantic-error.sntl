@@ -1,0 +1,4 @@
+policy ReviewSemantic {
+  rule AdminOnly when roles == "admin" then allow;
+  rule BlockDelete when method == "DELETE" then deny 700 "Blocked";
+}

@@ -1,0 +1,19 @@
+(* SentinelDSL grammar; whitespace and // or # comments may occur between tokens. *)
+
+policy       = "policy" , name , "{" , { rule | default-action | ";" } , "}" ;
+rule         = "rule" , name , "when" , expression , "then" , action , [ ";" ] ;
+default-action = "default" , action , [ ";" ] ;
+action       = ( "allow" | "deny" ) , [ number ] , [ string ] ;
+
+expression   = or-expression ;
+or-expression = and-expression , { "or" , and-expression } ;
+and-expression = unary-expression , { "and" , unary-expression } ;
+unary-expression = [ "not" ] , ( "(" , expression , ")" | comparison ) ;
+comparison   = primary , [ comparison-operator , primary ] ;
+comparison-operator = "==" | "!=" | "<" | "<=" | ">" | ">="
+                   | "contains" | "matches" | "in" ;
+
+primary      = identifier , { "." , identifier | "[" , ( string | identifier ) , "]" }
+             | string | number | "true" | "false"
+             | "[" , [ primary , { "," , primary } ] , "]" ;
+name         = identifier | string ;

@@ -1,0 +1,4 @@
+policy ReviewSyntax {
+  rule ReadUsers when method == "GET" then allow;
+  default deny 403 "No matching rule";
+}

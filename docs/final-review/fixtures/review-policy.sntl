@@ -1,0 +1,12 @@
+policy ReviewAPI {
+  rule BlockDelete when method == "DELETE"
+  then deny 403 "Delete is prohibited";
+
+  rule ReadUsers when
+    method == "GET"
+    and path matches "^/api/users/[0-9]+$"
+    and role in ["admin", "support"]
+  then allow;
+
+  default deny 403 "No matching authorization rule";
+}

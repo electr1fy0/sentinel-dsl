@@ -1,0 +1,6 @@
+{
+  "method": "GET",
+  "path": "/api/users/42",
+  "role": "support",
+  "headers": { "X-Request-ID": ["demo-1"] }
+}

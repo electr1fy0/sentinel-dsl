@@ -1,0 +1,13 @@
+policy UserAccess {
+  rule ReadUsers when
+    method == "GET"
+    and path matches "/api/users/[0-9]+"
+    and role in ["admin", "support"]
+  then allow;
+
+  rule DeleteUsers when
+    method == "DELETE"
+  then deny "Delete operation not permitted";
+
+  default deny "No matching rule";
+}

@@ -1,0 +1,5 @@
+policy ReviewSemantic {
+  rule AdminOnly when role == "admin" then allow;
+  rule BlockDelete when method == "DELETE" then deny 403 "Blocked";
+  default deny 403 "No matching rule";
+}

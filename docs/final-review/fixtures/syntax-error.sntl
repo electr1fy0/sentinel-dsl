@@ -1,0 +1,6 @@
+policy ReviewSyntax {
+  broken_statement;
+  rule ReadUsers when method == "GET" then allow;
+  stray_statement;
+  default deny 403 "No matching rule";
+}
